@@ -16,7 +16,8 @@ eval/rubric.py      7 维评估 rubric（D1–D7，单一事实来源）
 eval/llm_judge.py   LLM-as-judge（裁判与被评解耦，D4/D6 评分）
 examples/           评测脚本：eval_samples / discriminability(T07) / consistency(T08) / adversarial(T09)
 samples/            评测样本集（含 golden 标注、reference、live 缓存、adversarial 对抗样本）
-demo/               T12 交互式演示（server.py 后端 + T12_demo.html 前端，可输入任意合同实时评测）
+demo_04/            T12 交互式演示 v4（server.py 后端 + 前端，可输入任意合同实时评测）
+demo_05/            T12 交互式演示 v5（带审阅结果磁盘缓存，warmup.py 预热后点击示例即时出结果）
 T07_判别力验证.md / T08_一致性验证.md / T09_对抗验证.md / T10_评测报告.md / T11_分析报告.md
 ```
 
