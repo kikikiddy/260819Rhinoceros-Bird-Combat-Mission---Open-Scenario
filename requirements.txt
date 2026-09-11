@@ -1,0 +1,8 @@
+# 运行依赖
+openai>=1.40
+python-dotenv>=1.0
+
+# 开发/评测（后续 T 阶段按需安装）
+# pytest>=8.0
+# pypdf>=4.0        # 合同 PDF 解析（T03）
+# pandas>=2.0       # 评测结果表（T04/T10）

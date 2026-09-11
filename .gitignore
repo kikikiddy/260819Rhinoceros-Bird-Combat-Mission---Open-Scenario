@@ -1,0 +1,25 @@
+# 密钥与本地配置（绝不提交）
+.env
+.env.local
+*.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 评测结果（含真实模型输出，可能含敏感合同文本）
+eval/results/
+samples/reviews/*.live.json
+
+# demo 预热的审阅结果缓存（含真实模型输出）
+demo_*/.cache/
+
+# 备份文件（本地保留，不进版本库）
+*.bak
+
+# 系统
+.DS_Store
+.workbuddy/
+.vscode/

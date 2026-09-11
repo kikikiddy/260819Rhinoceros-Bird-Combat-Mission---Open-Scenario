@@ -1,0 +1,62 @@
+{
+  "contract_type": "labor",
+  "sample_role": "clean",
+  "expected_key_clauses": [
+    {
+      "name": "合同期限",
+      "keywords": [
+        "合同期限",
+        "试用期"
+      ]
+    },
+    {
+      "name": "工作内容与地点",
+      "keywords": [
+        "工作地点"
+      ]
+    },
+    {
+      "name": "劳动报酬",
+      "keywords": [
+        "工资",
+        "8000"
+      ]
+    },
+    {
+      "name": "社会保险",
+      "keywords": [
+        "社会保险"
+      ]
+    },
+    {
+      "name": "保密义务",
+      "keywords": [
+        "保密"
+      ]
+    },
+    {
+      "name": "竞业限制",
+      "keywords": [
+        "竞业限制",
+        "补偿"
+      ]
+    },
+    {
+      "name": "合同解除",
+      "keywords": [
+        "解除",
+        "通知"
+      ]
+    }
+  ],
+  "expected_risks": [
+    {
+      "topic": "加班费计算基数未约定",
+      "level": "中",
+      "keywords": [
+        "加班费计算基数",
+        "未与劳动者约定"
+      ]
+    }
+  ]
+}

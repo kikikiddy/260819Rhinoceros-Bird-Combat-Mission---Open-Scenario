@@ -1,0 +1,54 @@
+{
+  "contract_type": "lease",
+  "sample_role": "clean",
+  "expected_key_clauses": [
+    {
+      "name": "租赁标的与期限",
+      "keywords": [
+        "商铺",
+        "租期"
+      ]
+    },
+    {
+      "name": "租金与押金",
+      "keywords": [
+        "租金",
+        "押金"
+      ]
+    },
+    {
+      "name": "维修责任",
+      "keywords": [
+        "维修"
+      ]
+    },
+    {
+      "name": "转租",
+      "keywords": [
+        "转租",
+        "管理费"
+      ]
+    },
+    {
+      "name": "提前解约",
+      "keywords": [
+        "提前解约"
+      ]
+    },
+    {
+      "name": "免责",
+      "keywords": [
+        "不可抗力"
+      ]
+    }
+  ],
+  "expected_risks": [
+    {
+      "topic": "转租收取20%管理费偏高",
+      "level": "中",
+      "keywords": [
+        "20%作为管理费"
+      ]
+    }
+  ]
+}

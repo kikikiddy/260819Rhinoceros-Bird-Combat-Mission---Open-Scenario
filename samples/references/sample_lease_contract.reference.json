@@ -1,0 +1,108 @@
+{
+  "contract_type": "lease",
+  "sample_role": "standard",
+  "expected_key_clauses": [
+    {
+      "name": "租赁标的",
+      "keywords": [
+        "商铺",
+        "餐饮"
+      ]
+    },
+    {
+      "name": "租赁期限与免租期",
+      "keywords": [
+        "租赁期限",
+        "免租期"
+      ]
+    },
+    {
+      "name": "租金与递增",
+      "keywords": [
+        "租金",
+        "递增"
+      ]
+    },
+    {
+      "name": "押金",
+      "keywords": [
+        "押金"
+      ]
+    },
+    {
+      "name": "维修责任",
+      "keywords": [
+        "维修"
+      ]
+    },
+    {
+      "name": "转租",
+      "keywords": [
+        "转租"
+      ]
+    },
+    {
+      "name": "提前退租",
+      "keywords": [
+        "提前退租"
+      ]
+    },
+    {
+      "name": "费用承担",
+      "keywords": [
+        "费用"
+      ]
+    },
+    {
+      "name": "合同解除",
+      "keywords": [
+        "收回商铺"
+      ]
+    },
+    {
+      "name": "争议解决",
+      "keywords": [
+        "法院"
+      ]
+    }
+  ],
+  "expected_risks": [
+    {
+      "topic": "维修责任全转嫁承租方",
+      "level": "高",
+      "keywords": [
+        "一切维修养护责任均由乙方承担"
+      ]
+    },
+    {
+      "topic": "出租方任意解约且不担责",
+      "level": "高",
+      "keywords": [
+        "随时收回商铺",
+        "不承担责任"
+      ]
+    },
+    {
+      "topic": "提前退租违约金过重",
+      "level": "中",
+      "keywords": [
+        "押金不予退还",
+        "三个月租金作为违约金"
+      ]
+    },
+    {
+      "topic": "争议管辖偏置出租方",
+      "level": "中",
+      "keywords": [
+        "甲方所在地法院起诉"
+      ]
+    },
+    {
+      "topic": "费用承担全转嫁",
+      "level": "中",
+      "keywords": [
+        "一切费用均由乙方承担"
+      ]
+    }
+  ]
+}

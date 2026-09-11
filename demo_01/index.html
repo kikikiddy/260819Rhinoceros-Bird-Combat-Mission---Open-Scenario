@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>合同审阅助手 V1 · 交互式演示 demo_01（Hy3-preview）</title>
+<style>
+  :root{ --bg:#f5f7fa; --card:#fff; --ink:#1f2933; --muted:#6b7280; --line:#e5e7eb;
+    --brand:#2563eb; --hi:#dc2626; --mid:#d97706; --lo:#2563eb; --ok:#16a34a; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6}
+  header{background:linear-gradient(120deg,#1e3a8a,#2563eb);color:#fff;padding:24px 32px}
+  header h1{margin:0;font-size:22px}
+  header p{margin:6px 0 0;opacity:.9;font-size:14px}
+  .wrap{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:16px}
+  .card h3{margin:0 0 10px;font-size:15px;border-left:4px solid var(--brand);padding-left:8px}
+  textarea{width:100%;min-height:230px;resize:vertical;font-size:13px;font-family:"PingFang SC","Microsoft YaHei",monospace;
+    border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--ink);background:#fcfcfd}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center}
+  button{cursor:pointer;border:none;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:600}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:disabled{opacity:.6;cursor:not-allowed}
+  .btn-ghost{background:#eef2ff;color:var(--brand)}
+  .hint{color:var(--muted);font-size:12px}
+  #status{margin-top:10px;font-size:13px;min-height:18px}
+  .badge{display:inline-block;font-size:13px;font-weight:700;color:#fff;padding:3px 12px;border-radius:999px;background:var(--brand)}
+  .badge.labor{background:#7c3aed} .badge.lease{background:#0891b2} .badge.unknown{background:#6b7280}
+  .summary{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+  .clause{font-size:13px;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .clause b{color:var(--brand)}
+  .risk{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+  .risk .top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .lv{font-size:12px;font-weight:700;color:#fff;padding:2px 8px;border-radius:999px}
+  .lv.高{background:var(--hi)} .lv.中{background:var(--mid)} .lv.低{background:var(--lo)}
+  .risk .cl{font-weight:600;font-size:13px}
+  .risk .q{color:var(--muted);font-size:12px;margin:2px 0}
+  .risk .r{font-size:13px}
+  .risk .s{font-size:13px;color:#065f46;background:#ecfdf5;border-radius:6px;padding:6px 8px;margin-top:4px}
+  .check{font-size:13px;padding:4px 0}
+  .check .ok{color:var(--ok);font-weight:700}
+  .check .bad{color:var(--hi);font-weight:700}
+  .err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:8px;padding:10px 12px;font-size:13px;white-space:pre-wrap}
+  .disclaimer{color:var(--muted);font-size:12px;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .foot{color:var(--muted);font-size:12px;margin-top:24px;border-top:1px dashed var(--line);padding-top:14px}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:12px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>中小企业合同审阅助手 V1 · 交互式演示（demo_01）</h1>
+  <p>基于 Hy3 大模型（tencent/hy3-preview）· 劳动合同 / 商铺租赁合同场景 · 在下方输入任意合同文本，实时获得结构化审阅</p>
+</header>
+<div class="wrap">
+
+  <div class="card">
+    <h3>① 输入：合同文本（自由输入或加载示例）</h3>
+    <textarea id="contract" placeholder="在此粘贴劳动合同 / 租赁合同全文……例如：&#10;一、合同期限：本合同期限贰年，其中试用期为肆个月。&#10;二、劳动报酬：月工资6000元，加班工资另行协商。"></textarea>
+    <div class="toolbar">
+      <button class="btn-primary" id="runBtn" onclick="runReview()">开始评测</button>
+      <button class="btn-ghost" onclick="loadSample()">加载示例合同</button>
+      <button class="btn-ghost" onclick="clearAll()">清空</button>
+      <span class="hint">提示：评测在服务端调用 Hy3，密钥不离开本机；单次评测约 1 次模型调用。</span>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <div id="errorBox" class="card err hidden"></div>
+
+  <div id="resultBox" class="hidden">
+    <div class="card">
+      <h3>② 输出：合同类型与整体概况</h3>
+      <div><span class="badge" id="typeBadge">—</span></div>
+      <div class="summary" id="summary"></div>
+    </div>
+
+    <div class="card">
+      <h3>③ 关键条款抽取</h3>
+      <div id="clauses"></div>
+    </div>
+
+    <div class="card">
+      <h3>④ 风险提示（按 高 / 中 / 低 排序，均附原文引用与修改建议）</h3>
+      <div id="risks"></div>
+    </div>
+
+    <div class="card">
+      <h3>⑤ 本地质量自检（免费规则维度，无需裁判模型）</h3>
+      <div id="checks"></div>
+      <p class="hint" style="margin-top:8px">注：D1 条款抽取、D2 风险识别、D4 法律依据的完整打分需配合「专家标注 reference + LLM-judge」的离线评测框架（见 T10/T11 报告），交互演示聚焦实时审阅与可追溯性核验。</p>
+    </div>
+
+    <div class="disclaimer" id="disclaimer"></div>
+  </div>
+
+  <div class="foot">
+    <p><b>运行方式</b>：<code>python demo_01/server.py</code> 后打开 <code>http://127.0.0.1:8001/</code>；亦可直接双击本 HTML（需服务在运行）。</p>
+    <p>本 Demo 为个人 / 活动作品（犀牛鸟开源·混元大模型项目·实战任务一），非腾讯官方发布，仅供学习与评测展示。</p>
+  </div>
+</div>
+
+<script>
+const SAMPLE = `劳动合同
+
+甲方（用人单位）：示例科技有限公司
+乙方（劳动者）：张三
+
+一、合同期限：本合同期限贰年，自2026年9月1日起至2028年8月31日止，其中试用期为肆个月。
+二、工作内容与地点：乙方担任工程师，工作地点以甲方安排为准，甲方可根据经营需要单方调整。
+三、劳动报酬：乙方月工资为人民币6000元，于次月15日前支付，加班工资另行协商。
+四、社会保险：甲方依法为乙方缴纳社会保险（乙方承担个人部分）。
+五、保密义务：乙方在职及离职后均须保守甲方商业秘密，甲方不另行支付补偿。
+六、劳动合同解除：甲方可随时解除劳动合同且无需支付经济补偿；乙方解除须提前六个月书面通知。
+七、违约责任：乙方违反保密义务须支付违约金50万元；甲方违约不承担责任。
+八、争议解决：发生争议向甲方所在地法院起诉。`;
+
+const TYPE_LABEL = {labor:"劳动合同", lease:"商铺/办公租赁合同", unknown:"未识别合同类型"};
+const LEVEL_ORDER = {"高":0, "中":1, "低":2};
+
+function loadSample(){ document.getElementById('contract').value = SAMPLE; clearError(); }
+function clearAll(){ document.getElementById('contract').value = ""; document.getElementById('resultBox').classList.add('hidden'); clearError(); }
+function clearError(){ document.getElementById('errorBox').classList.add('hidden'); }
+function setStatus(msg){ document.getElementById('status').textContent = msg || ""; }
+function showError(msg){
+  const box = document.getElementById('errorBox');
+  box.textContent = msg; box.classList.remove('hidden');
+  document.getElementById('resultBox').classList.add('hidden');
+}
+
+function esc(s){ return (s||"").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+
+async function runReview(){
+  const text = document.getElementById('contract').value.trim();
+  if(!text){ showError("请先在上方输入或加载一份合同文本。"); return; }
+  clearError();
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true; setStatus("评测中…（正在调用 Hy3 审阅合同）");
+  try{
+    const resp = await fetch('/api/review', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({text})
+    });
+    const data = await resp.json();
+    if(!data.ok){ showError("评测失败：" + (data.error || "未知错误")); return; }
+    render(data.result, text);
+    setStatus("评测完成 ✓");
+  }catch(e){
+    showError("无法连接评测服务。请确认已运行：\n    python demo_01/server.py\n然后刷新本页（或访问 http://127.0.0.1:8001/）。\n\n错误信息：" + e.message);
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+function render(r, text){
+  document.getElementById('resultBox').classList.remove('hidden');
+
+  const t = r.contract_type || 'unknown';
+  const badge = document.getElementById('typeBadge');
+  badge.textContent = TYPE_LABEL[t] || t;
+  badge.className = 'badge ' + (['labor','lease','unknown'].includes(t) ? t : 'unknown');
+
+  document.getElementById('summary').textContent = r.summary || "（无概况）";
+
+  // 关键条款
+  const cl = document.getElementById('clauses');
+  cl.innerHTML = "";
+  if(r.key_clauses && r.key_clauses.length){
+    r.key_clauses.forEach(c => {
+      const d = document.createElement('div');
+      d.className = 'clause';
+      d.innerHTML = `<b>${esc(c.name)}</b>：${esc(c.content) || '—'}`;
+      cl.appendChild(d);
+    });
+  } else { cl.innerHTML = '<div class="hint">（未抽取到关键条款）</div>'; }
+
+  // 风险（按级别排序）
+  const rk = document.getElementById('risks');
+  rk.innerHTML = "";
+  const risks = (r.risks || []).slice().sort((a,b)=>(LEVEL_ORDER[a.level]??9)-(LEVEL_ORDER[b.level]??9));
+  if(risks.length){
+    risks.forEach(x => {
+      const d = document.createElement('div');
+      d.className = 'risk';
+      d.innerHTML = `
+        <div class="top"><span class="lv ${esc(x.level)}">${esc(x.level)}</span><span class="cl">${esc(x.clause)}</span></div>
+        <div class="q">原文：${esc(x.quote) || '—'}</div>
+        <div class="r">风险：${esc(x.risk) || '—'}</div>
+        <div class="s">建议：${esc(x.suggestion) || '—'}</div>`;
+      rk.appendChild(d);
+    });
+  } else { rk.innerHTML = '<div class="hint">未发现明显风险。</div>'; }
+
+  // 本地质量自检
+  const ck = document.getElementById('checks');
+  ck.innerHTML = "";
+  // D7 格式规范：成功解析即合法
+  ck.appendChild(checkItem("D7 格式规范（JSON 结构合法）", true, ""));
+  // D5 安全合规：免责声明存在
+  const hasDisc = !!(r.disclaimer && r.disclaimer.trim());
+  ck.appendChild(checkItem("D5 安全合规（含免责声明）", hasDisc, hasDisc?"":"未检测到免责声明"));
+  // D3 证据可追溯：引用可在原文定位
+  const total = risks.length;
+  let hit = 0;
+  risks.forEach(x => { if(x.quote && text.indexOf(x.quote) !== -1) hit++; });
+  const d3ok = total>0 ? (hit === total) : true;
+  ck.appendChild(checkItem(`D3 证据可追溯（${hit}/${total} 条风险引用可在原文定位）`, d3ok, d3ok?"":"部分引用未能在原文中精确匹配"));
+
+  document.getElementById('disclaimer').textContent = r.disclaimer || "";
+}
+
+function checkItem(label, ok, note){
+  const d = document.createElement('div');
+  d.className = 'check';
+  d.innerHTML = `<span class="${ok?'ok':'bad'}">${ok?'✓':'✗'}</span> ${esc(label)}${note?('（'+esc(note)+'）'):''}`;
+  return d;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+[
+  {
+    "sample": "sample_labor_clean",
+    "contract_type": "labor",
+    "role": "clean",
+    "source": "golden",
+    "overall_pct": "94.1%",
+    "scored_count": 7,
+    "pending": [],
+    "details": [
+      {
+        "id": "D1",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D2",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D3",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 2,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  },
+  {
+    "sample": "sample_labor_contract",
+    "contract_type": "labor",
+    "role": "standard",
+    "source": "golden",
+    "overall_pct": "94.1%",
+    "scored_count": 7,
+    "pending": [],
+    "details": [
+      {
+        "id": "D1",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D2",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D3",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 2,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  },
+  {
+    "sample": "sample_labor_fake_law",
+    "contract_type": "labor",
+    "role": "adversarial",
+    "source": "golden",
+    "overall_pct": "92.9%",
+    "scored_count": 6,
+    "pending": [
+      "D4"
+    ],
+    "details": [
+      {
+        "id": "D1",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D2",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D3",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 0,
+        "max": 3,
+        "status": "needs_llm"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 2,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  },
+  {
+    "sample": "sample_lease_clean",
+    "contract_type": "lease",
+    "role": "clean",
+    "source": "golden",
+    "overall_pct": "94.1%",
+    "scored_count": 7,
+    "pending": [],
+    "details": [
+      {
+        "id": "D1",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D2",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D3",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 2,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  },
+  {
+    "sample": "sample_lease_contract",
+    "contract_type": "lease",
+    "role": "standard",
+    "source": "golden",
+    "overall_pct": "94.1%",
+    "scored_count": 7,
+    "pending": [],
+    "details": [
+      {
+        "id": "D1",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D2",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D3",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 2,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  },
+  {
+    "sample": "sample_lease_jargon",
+    "contract_type": "lease",
+    "role": "adversarial",
+    "source": "golden",
+    "overall_pct": "94.1%",
+    "scored_count": 7,
+    "pending": [],
+    "details": [
+      {
+        "id": "D1",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D2",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D3",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 2,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  },
+  {
+    "sample": "sample_noncontract",
+    "contract_type": "unknown",
+    "role": "negative",
+    "source": "golden",
+    "overall_pct": "54.5%",
+    "scored_count": 5,
+    "pending": [
+      "D1",
+      "D2"
+    ],
+    "details": [
+      {
+        "id": "D1",
+        "score": 0,
+        "max": 3,
+        "status": "needs_reference"
+      },
+      {
+        "id": "D2",
+        "score": 0,
+        "max": 3,
+        "status": "needs_reference"
+      },
+      {
+        "id": "D3",
+        "score": 0,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D4",
+        "score": 3,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D5",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      },
+      {
+        "id": "D6",
+        "score": 1,
+        "max": 3,
+        "status": "scored"
+      },
+      {
+        "id": "D7",
+        "score": 1,
+        "max": 1,
+        "status": "scored"
+      }
+    ]
+  }
+]
